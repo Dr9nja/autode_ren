@@ -126,6 +126,66 @@ namespace KooliProjekt.Application.Migrations
                     b.ToTable("Customers");
                 });
 
+            modelBuilder.Entity("KooliProjekt.Application.Data.Invoice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("PaidAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("RentalId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Total")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RentalId")
+                        .IsUnique();
+
+                    b.ToTable("Invoices");
+                });
+
+            modelBuilder.Entity("KooliProjekt.Application.Data.InvoiceLine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("InvoiceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvoiceId")
+                        .IsUnique();
+
+                    b.ToTable("InvoiceLines");
+                });
+
             modelBuilder.Entity("KooliProjekt.Application.Data.Notification", b =>
                 {
                     b.Property<int>("Id")
@@ -190,6 +250,124 @@ namespace KooliProjekt.Application.Migrations
                     b.ToTable("Payments");
                 });
 
+            modelBuilder.Entity("KooliProjekt.Application.Data.Rental", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset?>("EndedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<decimal?>("KilometersDriven")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<DateTimeOffset>("StartedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarId")
+                        .IsUnique()
+                        .HasFilter("[Status] = N'active'");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Rentals");
+                });
+
+            modelBuilder.Entity("KooliProjekt.Application.Data.RentalCar", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("KilometerRate")
+                        .HasPrecision(10, 3)
+                        .HasColumnType("decimal(10,3)");
+
+                    b.Property<string>("Model")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("RegistrationNumber")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<decimal>("TimeRatePerMinute")
+                        .HasPrecision(10, 4)
+                        .HasColumnType("decimal(10,4)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RegistrationNumber")
+                        .IsUnique();
+
+                    b.ToTable("RentalCars");
+                });
+
+            modelBuilder.Entity("KooliProjekt.Application.Data.RentalUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(254)
+                        .HasColumnType("nvarchar(254)");
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .IsRequired()
+                        .HasMaxLength(254)
+                        .HasColumnType("nvarchar(254)");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .IsUnique();
+
+                    b.ToTable("RentalUsers");
+                });
+
             modelBuilder.Entity("KooliProjekt.Application.Data.Shop", b =>
                 {
                     b.Property<int>("Id")
@@ -245,6 +423,28 @@ namespace KooliProjekt.Application.Migrations
                     b.Navigation("Address");
                 });
 
+            modelBuilder.Entity("KooliProjekt.Application.Data.Invoice", b =>
+                {
+                    b.HasOne("KooliProjekt.Application.Data.Rental", "Rental")
+                        .WithOne("Invoice")
+                        .HasForeignKey("KooliProjekt.Application.Data.Invoice", "RentalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Rental");
+                });
+
+            modelBuilder.Entity("KooliProjekt.Application.Data.InvoiceLine", b =>
+                {
+                    b.HasOne("KooliProjekt.Application.Data.Invoice", "Invoice")
+                        .WithOne("Line")
+                        .HasForeignKey("KooliProjekt.Application.Data.InvoiceLine", "InvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Invoice");
+                });
+
             modelBuilder.Entity("KooliProjekt.Application.Data.Notification", b =>
                 {
                     b.HasOne("KooliProjekt.Application.Data.CarOrder", "Order")
@@ -267,6 +467,25 @@ namespace KooliProjekt.Application.Migrations
                     b.Navigation("Order");
                 });
 
+            modelBuilder.Entity("KooliProjekt.Application.Data.Rental", b =>
+                {
+                    b.HasOne("KooliProjekt.Application.Data.RentalCar", "Car")
+                        .WithMany()
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KooliProjekt.Application.Data.RentalUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Car");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("KooliProjekt.Application.Data.Address", b =>
                 {
                     b.Navigation("Customer");
@@ -282,6 +501,16 @@ namespace KooliProjekt.Application.Migrations
             modelBuilder.Entity("KooliProjekt.Application.Data.Customer", b =>
                 {
                     b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("KooliProjekt.Application.Data.Invoice", b =>
+                {
+                    b.Navigation("Line");
+                });
+
+            modelBuilder.Entity("KooliProjekt.Application.Data.Rental", b =>
+                {
+                    b.Navigation("Invoice");
                 });
 #pragma warning restore 612, 618
         }

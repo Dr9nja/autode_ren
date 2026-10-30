@@ -45,7 +45,7 @@ namespace KooliProjekt.Application.Data
             modelBuilder.Entity<Rental>()
                 .HasIndex(rental => rental.CarId)
                 .IsUnique()
-                .HasFilter("[Status] = N'active'");
+                .HasFilter("[Status] = 'active'");
 
             modelBuilder.Entity<Rental>()
                 .HasOne(rental => rental.Invoice)

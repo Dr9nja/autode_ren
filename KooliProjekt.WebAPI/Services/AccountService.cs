@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using KooliProjekt.Application.Data;
 using KooliProjekt.WebAPI.Contracts;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
 namespace KooliProjekt.WebAPI.Services
@@ -91,9 +92,10 @@ namespace KooliProjekt.WebAPI.Services
 
         private static bool IsUniqueConstraintViolation(DbUpdateException exception)
         {
-            return exception.GetBaseException() is Microsoft.Data.SqlClient.SqlException
+            return exception.GetBaseException() is SqliteException
             {
-                Number: 2601 or 2627
+                SqliteErrorCode: 19,
+                SqliteExtendedErrorCode: 1555 or 2067
             };
         }
     }

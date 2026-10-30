@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using KooliProjekt.Application.Data;
 using KooliProjekt.WebAPI.Contracts;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
 namespace KooliProjekt.WebAPI.Services
@@ -120,7 +121,7 @@ namespace KooliProjekt.WebAPI.Services
                 .Include(item => item.Invoice)
                 .ThenInclude(invoice => invoice.Line)
                 .Where(item => item.UserId == userId && item.Status == Active)
-                .OrderBy(item => item.StartedAt)
+                .OrderBy(item => item.Id)
                 .ToListAsync(cancellationToken);
 
             return rentals.Select(ToRentalResponse).ToList();
@@ -153,7 +154,7 @@ namespace KooliProjekt.WebAPI.Services
                 .Include(item => item.Invoice)
                 .ThenInclude(invoice => invoice.Line)
                 .Where(item => item.UserId == userId)
-                .OrderByDescending(item => item.StartedAt)
+                .OrderByDescending(item => item.Id)
                 .ToListAsync(cancellationToken);
 
             return rentals.Select(ToRentalResponse).ToList();
@@ -256,7 +257,7 @@ namespace KooliProjekt.WebAPI.Services
                 .Include(invoice => invoice.Rental)
                 .ThenInclude(rental => rental.User)
                 .OrderBy(invoice => invoice.IsPaid)
-                .ThenByDescending(invoice => invoice.CreatedAt)
+                .ThenByDescending(invoice => invoice.Id)
                 .ToListAsync(cancellationToken);
 
             return invoices.Select(invoice => new AdminInvoiceResponse(
@@ -328,9 +329,10 @@ namespace KooliProjekt.WebAPI.Services
 
         private static bool IsUniqueConstraintViolation(DbUpdateException exception)
         {
-            return exception.GetBaseException() is Microsoft.Data.SqlClient.SqlException
+            return exception.GetBaseException() is SqliteException
             {
-                Number: 2601 or 2627
+                SqliteErrorCode: 19,
+                SqliteExtendedErrorCode: 1555 or 2067
             };
         }
     }

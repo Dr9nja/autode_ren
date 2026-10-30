@@ -1,0 +1,168 @@
+:root {
+  color-scheme: light;
+  --ink: #1d2925;
+  --muted: #748079;
+  --paper: #f5f4f0;
+  --white: #fff;
+  --line: #e6e8e2;
+  --green: #2a694d;
+  --green-dark: #1e503a;
+  --soft-green: #e8f1eb;
+  font-family: "Avenir Next", Avenir, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  margin: 0;
+  min-width: 320px;
+}
+
+.topbar, main, footer {
+  margin: 0 auto;
+  max-width: 1100px;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.topbar {
+  align-items: center;
+  display: flex;
+  height: 82px;
+  justify-content: space-between;
+}
+
+.brand {
+  color: var(--ink);
+  font-family: "Avenir Next", Avenir, system-ui, sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -2px;
+  text-decoration: none;
+}
+
+.brand span { color: var(--green); }
+.contact-link { color: var(--ink); font-size: 14px; text-decoration: none; }
+
+.intro { padding: 66px 0 42px; }
+.eyebrow { color: var(--green); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; margin: 0 0 13px; }
+
+h1, h2, p { margin-top: 0; }
+h1 {
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(42px, 7vw, 72px);
+  letter-spacing: -4px;
+  line-height: 1.04;
+  margin: 0;
+}
+h1 span { color: var(--green); }
+.intro-copy { color: var(--muted); font-size: 16px; margin: 20px 0 0; }
+
+.booking-layout {
+  align-items: start;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(0, 1.55fr) minmax(250px, .8fr);
+  padding-bottom: 48px;
+}
+
+.booking-card, .summary-card, .shop-card, .status-card, .result-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.booking-card { padding: 32px; }
+.section-heading { align-items: center; display: flex; justify-content: space-between; margin-bottom: 26px; }
+.section-heading .eyebrow { margin-bottom: 7px; }
+h2 { font-family: "Avenir Next", Avenir, system-ui, sans-serif; font-size: 22px; letter-spacing: -.7px; margin-bottom: 0; }
+.step-number { align-items: center; background: var(--soft-green); border-radius: 50%; color: var(--green); display: inline-flex; font-size: 12px; font-weight: 700; height: 36px; justify-content: center; width: 36px; }
+
+label, .field-title { color: #3d4943; display: block; font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+input:not([type="checkbox"]), select {
+  appearance: none;
+  background-color: #fcfcfa;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  height: 44px;
+  margin-bottom: 17px;
+  padding: 0 12px;
+  width: 100%;
+}
+input:focus, select:focus { border-color: var(--green); outline: 2px solid #dcebe1; }
+.optional { color: #98a09b; font-weight: 400; }
+.two-column { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+.form-divider { border-top: 1px solid var(--line); margin: 5px 0 21px; }
+.field-title { font-size: 13px; margin-bottom: 14px; }
+.checkbox-row { align-items: center; display: flex; gap: 10px; margin: 3px 0 22px; }
+.checkbox-row input { accent-color: var(--green); height: 16px; width: 16px; }
+.checkbox-row span { color: var(--ink); font-size: 13px; }
+
+.button {
+  align-items: center;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 18px;
+  transition: background .15s ease;
+}
+.button:disabled { cursor: wait; opacity: .65; }
+.button-primary { background: var(--green); color: white; gap: 12px; width: 100%; }
+.button-primary:hover:not(:disabled) { background: var(--green-dark); }
+.button-secondary { background: #edf0ec; color: var(--ink); }
+.button-secondary:hover:not(:disabled) { background: #e1e6e0; }
+.privacy-note { color: var(--muted); font-size: 11px; line-height: 1.6; margin: 12px 0 0; }
+.message { color: #a13d35; font-size: 12px; line-height: 1.5; margin: 12px 0 0; min-height: 18px; }
+
+.side-column { display: grid; gap: 16px; }
+.summary-card, .shop-card { padding: 24px; }
+.steps { list-style: none; margin: 24px 0 0; padding: 0; }
+.steps li { align-items: flex-start; display: flex; gap: 12px; margin-bottom: 20px; }
+.steps li:last-child { margin-bottom: 0; }
+.steps li > span { align-items: center; background: var(--soft-green); border-radius: 50%; color: var(--green); display: inline-flex; flex: 0 0 25px; font-size: 11px; font-weight: 700; height: 25px; justify-content: center; }
+.steps strong, .steps small { display: block; }
+.steps strong { font-size: 12px; margin: 2px 0 4px; }
+.steps small { color: var(--muted); font-size: 11px; line-height: 1.4; }
+.shop-card h2 { font-size: 17px; margin-bottom: 10px; }
+.shop-card > p:not(.eyebrow), .shop-card a { color: var(--muted); font-size: 12px; line-height: 1.6; }
+.shop-card > p:not(.eyebrow) { margin-bottom: 5px; }
+.shop-card a { color: var(--green); text-decoration: none; }
+.status-card { align-items: center; display: flex; gap: 13px; padding: 20px; }
+.status-dot { background: #57a675; border-radius: 50%; box-shadow: 0 0 0 5px #e8f3eb; flex: 0 0 9px; height: 9px; margin: 0 4px; }
+.status-card strong { font-size: 12px; }
+.status-card p { color: var(--muted); font-size: 11px; line-height: 1.5; margin: 5px 0 0; }
+
+.result-card { margin: 0 0 48px; max-width: 700px; padding: 30px 32px; }
+.result-card > p:not(.eyebrow):not(.privacy-note) { color: var(--muted); font-size: 13px; line-height: 1.6; margin: 16px 0 0; }
+.button-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.button-row .button-primary { width: auto; }
+[hidden] { display: none !important; }
+footer { border-top: 1px solid #e3e4de; color: var(--muted); display: flex; font-size: 11px; justify-content: space-between; padding-bottom: 26px; padding-top: 22px; }
+
+@media (max-width: 760px) {
+  .topbar, main, footer { padding-left: 20px; padding-right: 20px; }
+  .intro { padding: 48px 0 34px; }
+  h1 { letter-spacing: -2.5px; }
+  .booking-layout { grid-template-columns: 1fr; }
+  .side-column { grid-template-columns: 1fr 1fr; }
+  .summary-card { grid-row: span 2; }
+}
+
+@media (max-width: 520px) {
+  .booking-card { padding: 23px 18px; }
+  .side-column { grid-template-columns: 1fr; }
+  .summary-card { grid-row: auto; }
+  .two-column { gap: 10px; }
+  .result-card { padding: 24px 18px; }
+}

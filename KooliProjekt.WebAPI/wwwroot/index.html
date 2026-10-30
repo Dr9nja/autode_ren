@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f4f0">
+  <title>Auto Deren — Car booking</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Auto Deren home">AD<span>.</span></a>
+    <a class="contact-link" id="shop-email" href="mailto:hello@autoderen.example">Contact</a>
+  </header>
+
+  <main>
+    <section class="intro">
+      <p class="eyebrow">YOUR NEXT RIDE, MADE SIMPLE</p>
+      <h1>Book a car.<br><span>Make it yours.</span></h1>
+      <p class="intro-copy">A straightforward car booking, with a car prepared just for you.</p>
+    </section>
+
+    <div class="booking-layout">
+      <form class="booking-card" id="booking-form">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">01 / YOUR BOOKING</p>
+            <h2>Tell us what you need</h2>
+          </div>
+          <span class="step-number">01</span>
+        </div>
+
+        <label for="car-model">Choose your car</label>
+        <select id="car-model" name="carModel" required>
+          <option value="City compact">City compact — easy around town</option>
+          <option value="Family SUV">Family SUV — room for everyone</option>
+          <option value="Electric">Electric — quiet and efficient</option>
+        </select>
+
+        <label for="booking-date">Booking date</label>
+        <input id="booking-date" name="bookingDate" type="date" required>
+
+        <div class="form-divider"></div>
+        <p class="field-title">Your details</p>
+        <div class="two-column">
+          <div>
+            <label for="name">Full name</label>
+            <input id="name" name="name" autocomplete="name" required maxlength="100">
+          </div>
+          <div>
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" autocomplete="email" required maxlength="254">
+          </div>
+        </div>
+        <label for="phone">Phone <span class="optional">(optional)</span></label>
+        <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="30">
+
+        <div class="form-divider"></div>
+        <p class="field-title">Your address</p>
+        <label for="street">Street address</label>
+        <input id="street" name="street" autocomplete="street-address" required maxlength="200">
+        <div class="two-column">
+          <div>
+            <label for="city">City</label>
+            <input id="city" name="city" autocomplete="address-level2" required maxlength="100">
+          </div>
+          <div>
+            <label for="county">County <span class="optional">(optional)</span></label>
+            <input id="county" name="county" autocomplete="address-level1" maxlength="100">
+          </div>
+        </div>
+        <div class="two-column">
+          <div>
+            <label for="postal-code">Postal code</label>
+            <input id="postal-code" name="postalCode" autocomplete="postal-code" required maxlength="20">
+          </div>
+          <div>
+            <label for="country">Country</label>
+            <input id="country" name="country" autocomplete="country-name" value="Estonia" required maxlength="100">
+          </div>
+        </div>
+
+        <label class="checkbox-row" for="get-to-home">
+          <input id="get-to-home" name="getToHome" type="checkbox">
+          <span>Deliver the car to my address</span>
+        </label>
+
+        <button class="button button-primary" type="submit">Continue to payment <span aria-hidden="true">→</span></button>
+        <p class="privacy-note">Demo booking only. No card details are requested or stored.</p>
+        <p class="message" id="form-message" role="status" aria-live="polite"></p>
+      </form>
+
+      <aside class="side-column">
+        <section class="summary-card">
+          <p class="eyebrow">HOW IT WORKS</p>
+          <ol class="steps">
+            <li><span>1</span><div><strong>Choose your car</strong><small>Pick a car and booking date</small></div></li>
+            <li><span>2</span><div><strong>Confirm payment</strong><small>Use the demo payment buttons</small></div></li>
+            <li><span>3</span><div><strong>We prepare your car</strong><small>A booking notification is created</small></div></li>
+          </ol>
+        </section>
+        <section class="shop-card">
+          <p class="eyebrow">VISIT OUR SHOP</p>
+          <h2 id="shop-name">Auto Deren</h2>
+          <p id="shop-address">Loading shop details…</p>
+          <a id="shop-contact" href="mailto:hello@autoderen.example">hello@autoderen.example</a>
+        </section>
+        <section class="status-card">
+          <span class="status-dot"></span>
+          <div><strong>Simple &amp; personal</strong><p>Real people, ready to help with your booking.</p></div>
+        </section>
+      </aside>
+    </div>
+
+    <section class="result-card" id="payment-step" hidden>
+      <div class="section-heading">
+        <div><p class="eyebrow">02 / PAYMENT</p><h2>Confirm your booking</h2></div>
+        <span class="step-number">02</span>
+      </div>
+      <p id="payment-summary"></p>
+      <p class="privacy-note">This demo simulates the payment result. It does not charge a card.</p>
+      <div class="button-row">
+        <button class="button button-primary" id="approve-payment" type="button">Confirm payment</button>
+        <button class="button button-secondary" id="cancel-payment" type="button">Cancel booking</button>
+      </div>
+      <p class="message" id="payment-message" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="result-card" id="booking-result" hidden>
+      <p class="eyebrow">BOOKING UPDATE</p>
+      <h2 id="result-title"></h2>
+      <p id="result-copy"></p>
+      <button class="button button-secondary" id="return-car" type="button" hidden>Return car</button>
+      <button class="button button-secondary" id="new-booking" type="button" hidden>Book another car</button>
+      <p class="message" id="result-message" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer>
+    <span>Auto Deren</span>
+    <span>Car booking, made simple.</span>
+  </footer>
+</body>
+</html>

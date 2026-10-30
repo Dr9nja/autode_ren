@@ -34,6 +34,10 @@ body {
   justify-content: space-between;
 }
 
+.topbar-right { align-items: center; display: flex; gap: 18px; }
+.signed-in-as { color: var(--muted); font-size: 12px; }
+.text-button { background: none; border: 0; color: var(--green); cursor: pointer; font: inherit; font-size: 12px; font-weight: 700; padding: 6px 0; }
+.text-button:hover { color: var(--green-dark); }
 .brand {
   color: var(--ink);
   font-family: "Avenir Next", Avenir, system-ui, sans-serif;
@@ -51,7 +55,7 @@ body {
 
 h1, h2, p { margin-top: 0; }
 h1 {
-  font-family: "Manrope", sans-serif;
+  font-family: "Avenir Next", Avenir, system-ui, sans-serif;
   font-size: clamp(42px, 7vw, 72px);
   letter-spacing: -4px;
   line-height: 1.04;
@@ -75,6 +79,72 @@ h1 span { color: var(--green); }
 }
 
 .booking-card { padding: 32px; }
+.auth-card, .account-banner, .section-block, .active-rental-card, .admin-card { margin-bottom: 38px; }
+.auth-card, .account-banner, .active-rental-card, .admin-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 28px 30px;
+}
+.auth-card { max-width: 720px; }
+.auth-heading { align-items: center; display: flex; justify-content: space-between; margin-bottom: 22px; }
+.auth-heading .eyebrow, .account-banner .eyebrow { margin-bottom: 7px; }
+.auth-heading h2, .account-banner h2 { font-size: 20px; }
+.auth-submit { max-width: 240px; }
+.account-banner { align-items: center; display: flex; justify-content: space-between; }
+.account-banner h2 { margin-bottom: 7px; }
+.account-banner p:last-child { color: var(--muted); font-size: 13px; margin: 0; }
+.account-check { align-items: center; background: var(--soft-green); border-radius: 50%; color: var(--green); display: inline-flex; font-size: 20px; height: 44px; justify-content: center; width: 44px; }
+.section-block { padding-bottom: 2px; }
+.section-copy { color: var(--muted); font-size: 12px; margin: -12px 0 16px; }
+.availability-label { align-items: center; color: var(--muted); display: inline-flex; font-size: 11px; gap: 9px; }
+.availability-label .status-dot { height: 7px; width: 7px; }
+.car-grid { display: grid; gap: 14px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.car-card { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 20px; }
+.car-card-top { align-items: center; display: flex; justify-content: space-between; }
+.car-type { color: var(--green); font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+.car-registration { color: var(--muted); font-size: 10px; }
+.car-model { font-family: "Avenir Next", Avenir, system-ui, sans-serif; font-size: 18px; letter-spacing: -.4px; margin: 18px 0 14px; }
+.car-rates { border-bottom: 1px solid var(--line); border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; padding: 12px 0; }
+.car-rates span { color: var(--muted); font-size: 11px; }
+.car-rent { margin-top: 15px; width: 100%; }
+.active-rental-list, .history-list, .admin-list { display: grid; gap: 10px; }
+.active-rental-item { align-items: center; background: #fcfcfa; border: 1px solid var(--line); border-radius: 8px; display: grid; gap: 24px; grid-template-columns: 1fr minmax(220px, .75fr); padding: 18px; }
+.active-rental-car h3 { font-family: "Avenir Next", Avenir, system-ui, sans-serif; font-size: 16px; margin: 8px 0; }
+.active-rental-car p { color: var(--muted); font-size: 11px; margin: 4px 0; }
+.active-rental-car .rate-note { color: var(--green); }
+.finish-form { align-items: end; display: flex; gap: 10px; }
+.finish-form .form-field { flex: 1; }
+.finish-form input { margin-bottom: 0 !important; }
+.finish-form .button { white-space: nowrap; }
+.history-item { align-items: center; background: var(--white); border: 1px solid var(--line); border-radius: 8px; display: flex; flex-wrap: wrap; gap: 15px; justify-content: space-between; padding: 16px 18px; }
+.history-detail, .invoice-detail { display: grid; gap: 5px; }
+.history-detail strong { font-size: 13px; }
+.history-detail span, .invoice-detail small { color: var(--muted); font-size: 11px; }
+.invoice-detail { align-items: end; grid-template-columns: auto auto; }
+.invoice-detail strong { font-size: 13px; }
+.invoice-detail small { grid-column: span 2; }
+.paid-label, .unpaid-label, .rental-status { font-size: 10px; font-weight: 700; letter-spacing: .5px; }
+.paid-label { color: var(--green); }
+.unpaid-label { color: #a45b28; }
+.rental-status { background: var(--soft-green); border-radius: 20px; color: var(--green); padding: 6px 9px; }
+.empty-state { color: var(--muted); font-size: 12px; }
+.admin-card { background: #fbfcfa; }
+.admin-card .section-heading { margin-bottom: 22px; }
+.admin-card h3 { font-family: "Avenir Next", Avenir, system-ui, sans-serif; font-size: 14px; margin: 0 0 12px; }
+.admin-car-fields { align-items: end; display: grid; gap: 12px; grid-template-columns: repeat(5, minmax(100px, 1fr)) auto; }
+.admin-car-fields input { margin-bottom: 0 !important; }
+.admin-car-fields .button { white-space: nowrap; }
+.admin-columns { display: grid; gap: 24px; grid-template-columns: 1fr 1fr; margin-top: 26px; }
+.admin-row { background: var(--white); border: 1px solid var(--line); border-radius: 7px; display: grid; gap: 6px; padding: 12px; }
+.admin-row strong { font-size: 11px; }
+.admin-row span, .admin-row small { color: var(--muted); font-size: 10px; }
+.admin-row .button { justify-self: start; min-height: 34px; }
+.info-row { border-bottom: 1px solid var(--line); border-top: 1px solid var(--line); display: grid; gap: 24px; grid-template-columns: repeat(3, 1fr); margin: 22px 0 42px; padding: 24px 0; }
+.info-row article { align-items: flex-start; display: flex; gap: 12px; }
+.info-icon { align-items: center; background: var(--soft-green); border-radius: 50%; color: var(--green); display: inline-flex; flex: 0 0 28px; font-size: 9px; height: 28px; justify-content: center; }
+.info-row h3 { font-family: "Avenir Next", Avenir, system-ui, sans-serif; font-size: 12px; margin: 3px 0 6px; }
+.info-row p { color: var(--muted); font-size: 10px; line-height: 1.5; margin: 0; }
 .section-heading { align-items: center; display: flex; justify-content: space-between; margin-bottom: 26px; }
 .section-heading .eyebrow { margin-bottom: 7px; }
 h2 { font-family: "Avenir Next", Avenir, system-ui, sans-serif; font-size: 22px; letter-spacing: -.7px; margin-bottom: 0; }
@@ -155,6 +225,11 @@ footer { border-top: 1px solid #e3e4de; color: var(--muted); display: flex; font
   .intro { padding: 48px 0 34px; }
   h1 { letter-spacing: -2.5px; }
   .booking-layout { grid-template-columns: 1fr; }
+  .car-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .admin-car-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .admin-car-fields .button { grid-column: 1 / -1; }
+  .active-rental-item { grid-template-columns: 1fr; }
+  .info-row { gap: 18px; }
   .side-column { grid-template-columns: 1fr 1fr; }
   .summary-card { grid-row: span 2; }
 }
@@ -164,5 +239,11 @@ footer { border-top: 1px solid #e3e4de; color: var(--muted); display: flex; font
   .side-column { grid-template-columns: 1fr; }
   .summary-card { grid-row: auto; }
   .two-column { gap: 10px; }
+  .auth-card, .account-banner, .active-rental-card, .admin-card { padding: 22px 17px; }
+  .car-grid, .admin-columns, .info-row { grid-template-columns: 1fr; }
+  .auth-heading { align-items: flex-start; gap: 12px; }
+  .finish-form { align-items: stretch; flex-direction: column; }
+  .history-item { align-items: flex-start; flex-direction: column; }
+  .account-banner { gap: 12px; }
   .result-card { padding: 24px 18px; }
 }

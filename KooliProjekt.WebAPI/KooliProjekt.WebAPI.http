@@ -1,6 +1,83 @@
-@KooliProjekt.WebAPI_HostAddress = http://localhost:5086
+@baseUrl = http://localhost:5086
 
-GET {{KooliProjekt.WebAPI_HostAddress}}/weatherforecast/
+# Configure the first administrator before starting the API:
+# Admin__Email=admin@example.com
+# Admin__Password=<secret of at least 12 characters>
+
+### Public list of available cars
+GET {{baseUrl}}/api/cars
 Accept: application/json
 
-###
+### Register a customer (signs them in and sets an auth cookie)
+POST {{baseUrl}}/api/account/register
+Content-Type: application/json
+
+{
+  "name": "Rental Customer",
+  "email": "renter@example.com",
+  "password": "replace-this-with-a-long-password"
+}
+
+### Sign in
+POST {{baseUrl}}/api/account/login
+Content-Type: application/json
+
+{
+  "email": "renter@example.com",
+  "password": "replace-this-with-a-long-password"
+}
+
+### Current account
+GET {{baseUrl}}/api/account/me
+
+### Start renting available car (requires sign-in)
+POST {{baseUrl}}/api/rentals
+Content-Type: application/json
+
+{
+  "carId": 1
+}
+
+### List active rentals
+GET {{baseUrl}}/api/rentals/mine
+
+### Get a rental by ID
+GET {{baseUrl}}/api/rentals/1
+
+### Rental history with invoices
+GET {{baseUrl}}/api/rentals/history
+
+### Finish rental and create invoice
+POST {{baseUrl}}/api/rentals/1/finish
+Content-Type: application/json
+
+{
+  "kilometersDriven": 42.5
+}
+
+### Add a car (admin only)
+POST {{baseUrl}}/api/admin/cars
+Content-Type: application/json
+
+{
+  "registrationNumber": "RENT-021",
+  "model": "New model",
+  "type": "New type",
+  "timeRatePerMinute": 0.035,
+  "kilometerRate": 0.24
+}
+
+### List fleet (admin only)
+GET {{baseUrl}}/api/admin/cars
+
+### Get a car (admin only)
+GET {{baseUrl}}/api/admin/cars/1
+
+### List invoices (admin only)
+GET {{baseUrl}}/api/admin/invoices
+
+### Mark invoice as paid (admin only)
+POST {{baseUrl}}/api/admin/invoices/1/mark-paid
+
+### Sign out
+POST {{baseUrl}}/api/account/logout

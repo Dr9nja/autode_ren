@@ -1,249 +1,174 @@
 :root {
-  color-scheme: light;
-  --ink: #1d2925;
-  --muted: #748079;
-  --paper: #f5f4f0;
-  --white: #fff;
-  --line: #e6e8e2;
-  --green: #2a694d;
-  --green-dark: #1e503a;
-  --soft-green: #e8f1eb;
-  font-family: "Avenir Next", Avenir, system-ui, sans-serif;
+  color-scheme: dark;
+  --black: #080b09;
+  --surface: #111713;
+  --line: #29342d;
+  --green: #63d98b;
+  --green-dark: #143522;
+  --text: #f2f5f2;
+  --muted: #a4b0a7;
+  font-family: Arial, sans-serif;
 }
 
 * { box-sizing: border-box; }
 
 body {
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--black);
+  color: var(--text);
   margin: 0;
   min-width: 320px;
 }
 
 .topbar, main, footer {
   margin: 0 auto;
-  max-width: 1100px;
-  padding-left: 32px;
-  padding-right: 32px;
+  max-width: 960px;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .topbar {
   align-items: center;
+  border-bottom: 1px solid var(--line);
   display: flex;
-  height: 82px;
+  height: 64px;
   justify-content: space-between;
 }
 
-.topbar-right { align-items: center; display: flex; gap: 18px; }
+.topbar-right { align-items: center; display: flex; gap: 16px; }
+.brand { color: var(--text); font-size: 20px; font-weight: 700; text-decoration: none; }
+.brand span, h1 span { color: var(--green); }
 .signed-in-as { color: var(--muted); font-size: 12px; }
-.text-button { background: none; border: 0; color: var(--green); cursor: pointer; font: inherit; font-size: 12px; font-weight: 700; padding: 6px 0; }
-.text-button:hover { color: var(--green-dark); }
-.brand {
-  color: var(--ink);
-  font-family: "Avenir Next", Avenir, system-ui, sans-serif;
-  font-size: 24px;
-  font-weight: 800;
-  letter-spacing: -2px;
-  text-decoration: none;
-}
 
-.brand span { color: var(--green); }
-.contact-link { color: var(--ink); font-size: 14px; text-decoration: none; }
+.intro { padding: 48px 0 28px; }
+h1 { font-size: clamp(36px, 7vw, 58px); letter-spacing: -2px; line-height: 1.05; margin: 0; }
+.intro-copy { color: var(--muted); font-size: 15px; line-height: 1.5; margin: 14px 0 0; max-width: 520px; }
+h2 { font-size: 20px; margin: 0; }
+h3 { font-size: 15px; margin: 0; }
+p { line-height: 1.5; }
 
-.intro { padding: 66px 0 42px; }
-.eyebrow { color: var(--green); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; margin: 0 0 13px; }
-
-h1, h2, p { margin-top: 0; }
-h1 {
-  font-family: "Avenir Next", Avenir, system-ui, sans-serif;
-  font-size: clamp(42px, 7vw, 72px);
-  letter-spacing: -4px;
-  line-height: 1.04;
-  margin: 0;
-}
-h1 span { color: var(--green); }
-.intro-copy { color: var(--muted); font-size: 16px; margin: 20px 0 0; }
-
-.booking-layout {
-  align-items: start;
-  display: grid;
-  gap: 24px;
-  grid-template-columns: minmax(0, 1.55fr) minmax(250px, .8fr);
-  padding-bottom: 48px;
-}
-
-.booking-card, .summary-card, .shop-card, .status-card, .result-card {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-}
-
-.booking-card { padding: 32px; }
-.auth-card, .account-banner, .section-block, .active-rental-card, .admin-card { margin-bottom: 38px; }
 .auth-card, .account-banner, .active-rental-card, .admin-card {
-  background: var(--white);
+  background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 28px 30px;
+  margin-bottom: 28px;
+  padding: 22px;
 }
-.auth-card { max-width: 720px; }
-.auth-heading { align-items: center; display: flex; justify-content: space-between; margin-bottom: 22px; }
-.auth-heading .eyebrow, .account-banner .eyebrow { margin-bottom: 7px; }
-.auth-heading h2, .account-banner h2 { font-size: 20px; }
-.auth-submit { max-width: 240px; }
-.account-banner { align-items: center; display: flex; justify-content: space-between; }
-.account-banner h2 { margin-bottom: 7px; }
-.account-banner p:last-child { color: var(--muted); font-size: 13px; margin: 0; }
-.account-check { align-items: center; background: var(--soft-green); border-radius: 50%; color: var(--green); display: inline-flex; font-size: 20px; height: 44px; justify-content: center; width: 44px; }
-.section-block { padding-bottom: 2px; }
-.section-copy { color: var(--muted); font-size: 12px; margin: -12px 0 16px; }
-.availability-label { align-items: center; color: var(--muted); display: inline-flex; font-size: 11px; gap: 9px; }
-.availability-label .status-dot { height: 7px; width: 7px; }
-.car-grid { display: grid; gap: 14px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.car-card { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 20px; }
+
+.auth-card { max-width: 680px; }
+.auth-heading, .section-heading, .account-banner { align-items: center; display: flex; justify-content: space-between; gap: 16px; }
+.auth-heading { margin-bottom: 18px; }
+.auth-heading h2, .account-banner h2 { font-size: 18px; }
+.account-banner p:last-child { color: var(--muted); font-size: 13px; margin: 6px 0 0; }
+.account-check { color: var(--green); font-size: 22px; }
+.text-button { background: none; border: 0; color: var(--green); cursor: pointer; font: inherit; font-size: 13px; }
+
+.section-block, .active-rental-card, .admin-card { margin-bottom: 32px; }
+.section-heading { margin-bottom: 16px; }
+.availability-label { align-items: center; color: var(--muted); display: inline-flex; font-size: 12px; gap: 8px; }
+.status-dot { background: var(--green); border-radius: 50%; display: inline-block; height: 8px; width: 8px; }
+.section-copy { color: var(--muted); font-size: 12px; margin: 0 0 12px; }
+
+.car-grid { display: grid; gap: 12px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.car-card, .active-rental-item, .history-item, .admin-row {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 16px;
+}
 .car-card-top { align-items: center; display: flex; justify-content: space-between; }
-.car-type { color: var(--green); font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-.car-registration { color: var(--muted); font-size: 10px; }
-.car-model { font-family: "Avenir Next", Avenir, system-ui, sans-serif; font-size: 18px; letter-spacing: -.4px; margin: 18px 0 14px; }
-.car-rates { border-bottom: 1px solid var(--line); border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; padding: 12px 0; }
-.car-rates span { color: var(--muted); font-size: 11px; }
-.car-rent { margin-top: 15px; width: 100%; }
+.car-type { color: var(--green); font-size: 11px; font-weight: 700; text-transform: uppercase; }
+.car-registration, .history-detail span, .invoice-detail small, .admin-row span, .admin-row small {
+  color: var(--muted);
+  font-size: 11px;
+}
+.car-model { margin: 14px 0; }
+.car-rates { border-bottom: 1px solid var(--line); border-top: 1px solid var(--line); display: grid; gap: 6px; padding: 10px 0; }
+.car-rates span { color: var(--muted); font-size: 12px; }
+.car-rent { margin-top: 12px; width: 100%; }
+
 .active-rental-list, .history-list, .admin-list { display: grid; gap: 10px; }
-.active-rental-item { align-items: center; background: #fcfcfa; border: 1px solid var(--line); border-radius: 8px; display: grid; gap: 24px; grid-template-columns: 1fr minmax(220px, .75fr); padding: 18px; }
-.active-rental-car h3 { font-family: "Avenir Next", Avenir, system-ui, sans-serif; font-size: 16px; margin: 8px 0; }
-.active-rental-car p { color: var(--muted); font-size: 11px; margin: 4px 0; }
+.active-rental-item { display: grid; gap: 18px; grid-template-columns: 1fr minmax(220px, .75fr); }
+.active-rental-car h3 { margin: 7px 0; }
+.active-rental-car p { color: var(--muted); font-size: 12px; margin: 5px 0; }
 .active-rental-car .rate-note { color: var(--green); }
 .finish-form { align-items: end; display: flex; gap: 10px; }
 .finish-form .form-field { flex: 1; }
 .finish-form input { margin-bottom: 0 !important; }
 .finish-form .button { white-space: nowrap; }
-.history-item { align-items: center; background: var(--white); border: 1px solid var(--line); border-radius: 8px; display: flex; flex-wrap: wrap; gap: 15px; justify-content: space-between; padding: 16px 18px; }
+.history-item { align-items: center; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; }
 .history-detail, .invoice-detail { display: grid; gap: 5px; }
-.history-detail strong { font-size: 13px; }
-.history-detail span, .invoice-detail small { color: var(--muted); font-size: 11px; }
 .invoice-detail { align-items: end; grid-template-columns: auto auto; }
-.invoice-detail strong { font-size: 13px; }
 .invoice-detail small { grid-column: span 2; }
-.paid-label, .unpaid-label, .rental-status { font-size: 10px; font-weight: 700; letter-spacing: .5px; }
-.paid-label { color: var(--green); }
-.unpaid-label { color: #a45b28; }
-.rental-status { background: var(--soft-green); border-radius: 20px; color: var(--green); padding: 6px 9px; }
-.empty-state { color: var(--muted); font-size: 12px; }
-.admin-card { background: #fbfcfa; }
-.admin-card .section-heading { margin-bottom: 22px; }
-.admin-card h3 { font-family: "Avenir Next", Avenir, system-ui, sans-serif; font-size: 14px; margin: 0 0 12px; }
-.admin-car-fields { align-items: end; display: grid; gap: 12px; grid-template-columns: repeat(5, minmax(100px, 1fr)) auto; }
+.paid-label { color: var(--green); font-size: 11px; }
+.unpaid-label { color: var(--muted); font-size: 11px; }
+.rental-status { background: var(--green-dark); color: var(--green); font-size: 10px; font-weight: 700; padding: 5px 8px; }
+.empty-state { color: var(--muted); font-size: 13px; }
+
+.admin-card { border-color: var(--green-dark); }
+.admin-card h3 { margin-bottom: 10px; }
+.admin-card .section-heading { margin-bottom: 20px; }
+.admin-car-fields { align-items: end; display: grid; gap: 10px; grid-template-columns: repeat(5, minmax(100px, 1fr)) auto; }
 .admin-car-fields input { margin-bottom: 0 !important; }
 .admin-car-fields .button { white-space: nowrap; }
-.admin-columns { display: grid; gap: 24px; grid-template-columns: 1fr 1fr; margin-top: 26px; }
-.admin-row { background: var(--white); border: 1px solid var(--line); border-radius: 7px; display: grid; gap: 6px; padding: 12px; }
-.admin-row strong { font-size: 11px; }
-.admin-row span, .admin-row small { color: var(--muted); font-size: 10px; }
+.admin-columns { display: grid; gap: 20px; grid-template-columns: 1fr 1fr; margin-top: 22px; }
+.admin-row { display: grid; gap: 5px; padding: 12px; }
+.admin-row strong { font-size: 12px; }
 .admin-row .button { justify-self: start; min-height: 34px; }
-.info-row { border-bottom: 1px solid var(--line); border-top: 1px solid var(--line); display: grid; gap: 24px; grid-template-columns: repeat(3, 1fr); margin: 22px 0 42px; padding: 24px 0; }
-.info-row article { align-items: flex-start; display: flex; gap: 12px; }
-.info-icon { align-items: center; background: var(--soft-green); border-radius: 50%; color: var(--green); display: inline-flex; flex: 0 0 28px; font-size: 9px; height: 28px; justify-content: center; }
-.info-row h3 { font-family: "Avenir Next", Avenir, system-ui, sans-serif; font-size: 12px; margin: 3px 0 6px; }
-.info-row p { color: var(--muted); font-size: 10px; line-height: 1.5; margin: 0; }
-.section-heading { align-items: center; display: flex; justify-content: space-between; margin-bottom: 26px; }
-.section-heading .eyebrow { margin-bottom: 7px; }
-h2 { font-family: "Avenir Next", Avenir, system-ui, sans-serif; font-size: 22px; letter-spacing: -.7px; margin-bottom: 0; }
-.step-number { align-items: center; background: var(--soft-green); border-radius: 50%; color: var(--green); display: inline-flex; font-size: 12px; font-weight: 700; height: 36px; justify-content: center; width: 36px; }
 
-label, .field-title { color: #3d4943; display: block; font-size: 12px; font-weight: 600; margin-bottom: 8px; }
-input:not([type="checkbox"]), select {
-  appearance: none;
-  background-color: #fcfcfa;
+label, .field-title { color: var(--text); display: block; font-size: 12px; font-weight: 600; margin-bottom: 7px; }
+.two-column { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+input:not([type="checkbox"]) {
+  background: var(--black);
   border: 1px solid var(--line);
-  border-radius: 6px;
-  color: var(--ink);
+  border-radius: 3px;
+  color: var(--text);
   font: inherit;
   font-size: 13px;
-  height: 44px;
-  margin-bottom: 17px;
-  padding: 0 12px;
+  height: 40px;
+  margin-bottom: 14px;
+  padding: 0 10px;
   width: 100%;
 }
-input:focus, select:focus { border-color: var(--green); outline: 2px solid #dcebe1; }
-.optional { color: #98a09b; font-weight: 400; }
-.two-column { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
-.form-divider { border-top: 1px solid var(--line); margin: 5px 0 21px; }
-.field-title { font-size: 13px; margin-bottom: 14px; }
-.checkbox-row { align-items: center; display: flex; gap: 10px; margin: 3px 0 22px; }
-.checkbox-row input { accent-color: var(--green); height: 16px; width: 16px; }
-.checkbox-row span { color: var(--ink); font-size: 13px; }
-
+input:focus { border-color: var(--green); outline: 1px solid var(--green); }
 .button {
-  align-items: center;
-  border: 0;
-  border-radius: 6px;
+  background: var(--green);
+  border: 1px solid var(--green);
+  border-radius: 3px;
+  color: var(--black);
   cursor: pointer;
-  display: inline-flex;
   font: inherit;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
-  justify-content: center;
-  min-height: 46px;
-  padding: 0 18px;
-  transition: background .15s ease;
+  min-height: 40px;
+  padding: 0 14px;
 }
-.button:disabled { cursor: wait; opacity: .65; }
-.button-primary { background: var(--green); color: white; gap: 12px; width: 100%; }
-.button-primary:hover:not(:disabled) { background: var(--green-dark); }
-.button-secondary { background: #edf0ec; color: var(--ink); }
-.button-secondary:hover:not(:disabled) { background: #e1e6e0; }
-.privacy-note { color: var(--muted); font-size: 11px; line-height: 1.6; margin: 12px 0 0; }
-.message { color: #a13d35; font-size: 12px; line-height: 1.5; margin: 12px 0 0; min-height: 18px; }
-
-.side-column { display: grid; gap: 16px; }
-.summary-card, .shop-card { padding: 24px; }
-.steps { list-style: none; margin: 24px 0 0; padding: 0; }
-.steps li { align-items: flex-start; display: flex; gap: 12px; margin-bottom: 20px; }
-.steps li:last-child { margin-bottom: 0; }
-.steps li > span { align-items: center; background: var(--soft-green); border-radius: 50%; color: var(--green); display: inline-flex; flex: 0 0 25px; font-size: 11px; font-weight: 700; height: 25px; justify-content: center; }
-.steps strong, .steps small { display: block; }
-.steps strong { font-size: 12px; margin: 2px 0 4px; }
-.steps small { color: var(--muted); font-size: 11px; line-height: 1.4; }
-.shop-card h2 { font-size: 17px; margin-bottom: 10px; }
-.shop-card > p:not(.eyebrow), .shop-card a { color: var(--muted); font-size: 12px; line-height: 1.6; }
-.shop-card > p:not(.eyebrow) { margin-bottom: 5px; }
-.shop-card a { color: var(--green); text-decoration: none; }
-.status-card { align-items: center; display: flex; gap: 13px; padding: 20px; }
-.status-dot { background: #57a675; border-radius: 50%; box-shadow: 0 0 0 5px #e8f3eb; flex: 0 0 9px; height: 9px; margin: 0 4px; }
-.status-card strong { font-size: 12px; }
-.status-card p { color: var(--muted); font-size: 11px; line-height: 1.5; margin: 5px 0 0; }
-
-.result-card { margin: 0 0 48px; max-width: 700px; padding: 30px 32px; }
-.result-card > p:not(.eyebrow):not(.privacy-note) { color: var(--muted); font-size: 13px; line-height: 1.6; margin: 16px 0 0; }
-.button-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
-.button-row .button-primary { width: auto; }
+.button:hover:not(:disabled) { background: #83e8a4; }
+.button:disabled { cursor: wait; opacity: .6; }
+.button-secondary { background: transparent; color: var(--green); }
+.button-secondary:hover:not(:disabled) { background: var(--green-dark); }
+.auth-submit { max-width: 220px; width: 100%; }
+.message { color: var(--green); font-size: 12px; line-height: 1.5; margin: 10px 0 0; min-height: 16px; }
 [hidden] { display: none !important; }
-footer { border-top: 1px solid #e3e4de; color: var(--muted); display: flex; font-size: 11px; justify-content: space-between; padding-bottom: 26px; padding-top: 22px; }
 
-@media (max-width: 760px) {
-  .topbar, main, footer { padding-left: 20px; padding-right: 20px; }
-  .intro { padding: 48px 0 34px; }
-  h1 { letter-spacing: -2.5px; }
-  .booking-layout { grid-template-columns: 1fr; }
+.info-row { border-top: 1px solid var(--line); display: grid; gap: 20px; grid-template-columns: repeat(3, 1fr); margin: 34px 0; padding-top: 20px; }
+.info-row article { display: flex; gap: 10px; }
+.info-icon { color: var(--green); font-size: 11px; font-weight: 700; }
+.info-row h3 { font-size: 13px; margin-bottom: 5px; }
+.info-row p { color: var(--muted); font-size: 11px; margin: 0; }
+footer { border-top: 1px solid var(--line); color: var(--muted); display: flex; font-size: 11px; justify-content: space-between; padding-bottom: 20px; padding-top: 16px; }
+
+@media (max-width: 700px) {
   .car-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .admin-car-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .admin-car-fields .button { grid-column: 1 / -1; }
   .active-rental-item { grid-template-columns: 1fr; }
-  .info-row { gap: 18px; }
-  .side-column { grid-template-columns: 1fr 1fr; }
-  .summary-card { grid-row: span 2; }
 }
 
-@media (max-width: 520px) {
-  .booking-card { padding: 23px 18px; }
-  .side-column { grid-template-columns: 1fr; }
-  .summary-card { grid-row: auto; }
-  .two-column { gap: 10px; }
-  .auth-card, .account-banner, .active-rental-card, .admin-card { padding: 22px 17px; }
-  .car-grid, .admin-columns, .info-row { grid-template-columns: 1fr; }
-  .auth-heading { align-items: flex-start; gap: 12px; }
-  .finish-form { align-items: stretch; flex-direction: column; }
-  .history-item { align-items: flex-start; flex-direction: column; }
-  .account-banner { gap: 12px; }
-  .result-card { padding: 24px 18px; }
+@media (max-width: 480px) {
+  .topbar, main, footer { padding-left: 16px; padding-right: 16px; }
+  .intro { padding: 36px 0 22px; }
+  .auth-card, .account-banner, .active-rental-card, .admin-card { padding: 17px; }
+  .car-grid, .admin-columns, .info-row, .two-column { grid-template-columns: 1fr; }
+  .auth-heading { align-items: flex-start; }
+  .finish-form, .history-item { align-items: stretch; flex-direction: column; }
+  .availability-label { font-size: 0; }
+  .availability-label .status-dot { height: 9px; width: 9px; }
 }

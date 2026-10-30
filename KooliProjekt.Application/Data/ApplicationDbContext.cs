@@ -1,8 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace KooliProjekt.Application.Data
@@ -13,8 +8,34 @@ namespace KooliProjekt.Application.Data
         {
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<TodoList> TodoLists { get; set; }
-        public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<Shop> Shops { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<CarOrder> Orders { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CarOrder>()
+                .HasOne(order => order.Payment)
+                .WithOne(payment => payment.Order)
+                .HasForeignKey<Payment>(payment => payment.OrderId);
+
+            modelBuilder.Entity<CarOrder>()
+                .HasOne(order => order.Customer)
+                .WithMany(customer => customer.Orders)
+                .HasForeignKey(order => order.CustomerId);
+
+            modelBuilder.Entity<Customer>()
+                .HasOne(customer => customer.Address)
+                .WithOne(address => address.Customer)
+                .HasForeignKey<Customer>(customer => customer.AddressId);
+
+            modelBuilder.Entity<CarOrder>()
+                .HasMany(order => order.Notifications)
+                .WithOne(notification => notification.Order)
+                .HasForeignKey(notification => notification.OrderId);
+        }
     }
 }

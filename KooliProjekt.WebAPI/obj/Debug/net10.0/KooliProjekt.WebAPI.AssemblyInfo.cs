@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KooliProjekt.WebAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+071ff45f43c5032ed0d4681787d1b64ebf982914")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cb1bef6dbb969fd7e04641948b5ce742e8550ff1")]
 [assembly: System.Reflection.AssemblyProductAttribute("KooliProjekt.WebAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KooliProjekt.WebAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

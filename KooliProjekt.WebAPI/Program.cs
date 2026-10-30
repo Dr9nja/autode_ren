@@ -1,4 +1,10 @@
+using System;
+using System.Threading.Tasks;
 using KooliProjekt.Application.Data;
+using KooliProjekt.WebAPI.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +28,30 @@ namespace KooliProjekt.WebAPI
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services
+                .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.Cookie.HttpOnly = true;
+                    options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Strict;
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                    options.ExpireTimeSpan = TimeSpan.FromHours(8);
+                    options.SlidingExpiration = true;
+                    options.Events.OnRedirectToLogin = context =>
+                    {
+                        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                        return Task.CompletedTask;
+                    };
+                    options.Events.OnRedirectToAccessDenied = context =>
+                    {
+                        context.Response.StatusCode = StatusCodes.Status403Forbidden;
+                        return Task.CompletedTask;
+                    };
+                });
+            builder.Services.AddAuthorization();
+            builder.Services.AddScoped<IAccountService, AccountService>();
+            builder.Services.AddScoped<ICarRentalService, CarRentalService>();
+            builder.Services.AddSingleton<PasswordHasher<RentalUser>>();
 
             var app = builder.Build();
 
@@ -33,6 +63,7 @@ namespace KooliProjekt.WebAPI
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
 
@@ -41,6 +72,12 @@ namespace KooliProjekt.WebAPI
             {
                 dbContext.Database.Migrate();
                 SeedData.Generate(dbContext);
+                AdminAccountSeeder.SeedAsync(
+                    dbContext,
+                    app.Configuration,
+                    scope.ServiceProvider.GetRequiredService<PasswordHasher<RentalUser>>())
+                    .GetAwaiter()
+                    .GetResult();
             }
 
 
